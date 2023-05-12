@@ -43,9 +43,9 @@ public class FoodController {
         if (foodOptional.isPresent()) {
             Food food = foodOptional.get();
             foodRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Item " + food.getTitle() + " excluído com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body("Alimento " + food.getTitle() + " excluído com sucesso!");
         }
-        return status(HttpStatus.NOT_FOUND).body("Esse item não existe.");
+        return status(HttpStatus.NOT_FOUND).body("Esse alimento não existe.");
     }
 
 }
