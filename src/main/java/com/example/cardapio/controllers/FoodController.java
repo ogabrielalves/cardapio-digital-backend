@@ -35,7 +35,7 @@ public class FoodController {
         return status(HttpStatus.CREATED).body(food.getTitle() + " criado com sucesso!");
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/delete/{id}")
     @Transactional
     public ResponseEntity<String> deleteFood(@PathVariable Long id) {
         Optional<Food> foodOptional = foodRepository.findById(id);
