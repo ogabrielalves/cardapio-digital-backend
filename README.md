@@ -3,8 +3,6 @@ Este é um projeto de um cardápio digital, voltada para estudos de uma criaçã
 ## Requisitos 💻
 - Para rodar esse projeto você precisa ter o Java 17 instalado na sua máquina.
 
-<br>
-
 ## Gerando o JAR 🚀
 - Navegue até a pasta raiz do projeto onde fica localizado o arquivo pom.xml
 - Abra o console no diretorio e execute a seguinte linha abaixo:
