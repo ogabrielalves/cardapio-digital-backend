@@ -24,28 +24,49 @@ public class FoodController {
 
     @GetMapping
     public ResponseEntity<List<FoodResponseDTO>> getAllFoods() {
-        List<FoodResponseDTO> foodList = foodRepository.findAll().stream().map(FoodResponseDTO::new).toList();
-        return foodList.isEmpty() ? status(HttpStatus.NO_CONTENT).build() : status(HttpStatus.OK).body(foodList);
+        try {
+            System.out.println("[!] getAllFoods() executed successfully!");
+            List<FoodResponseDTO> foodList = foodRepository.findAll().stream().map(FoodResponseDTO::new).toList();
+            return foodList.isEmpty() ? status(HttpStatus.NO_CONTENT).build() : status(HttpStatus.OK).body(foodList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping
     public ResponseEntity<String> newFood(@RequestBody FoodRequestDTO newFood) {
-        Food food = new Food(newFood);
-        foodRepository.save(food);
-        return status(HttpStatus.CREATED).body(food.getTitle() + " criado com sucesso!");
+        try {
+            System.out.println("[!] newFood() executed successfully!");
+            Food food = new Food(newFood);
+            foodRepository.save(food);
+            System.out.println("[!] New food has created!");
+            return status(HttpStatus.CREATED).body(food.getTitle() + " criado com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/delete/{id}")
     @Transactional
     public ResponseEntity<String> deleteFood(@PathVariable Long id) {
-        Optional<Food> foodOptional = foodRepository.findById(id);
-        
-        if (foodOptional.isPresent()) {
-            Food food = foodOptional.get();
-            foodRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Alimento " + food.getTitle() + " excluído com sucesso!");
+        try {
+            System.out.println("[!] deleteFood() executed successfully!");
+            Optional<Food> foodOptional = foodRepository.findById(id);
+
+            if (foodOptional.isPresent()) {
+                Food food = foodOptional.get();
+                foodRepository.deleteById(id);
+                System.out.println("[!] Food has deleted!");
+                return ResponseEntity.status(HttpStatus.OK).body("Alimento " + food.getTitle() + " excluído com sucesso!");
+            }
+            System.out.println("[!] Food not has deleted!");
+            return status(HttpStatus.NOT_FOUND).body("Esse alimento não existe.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return status(HttpStatus.NOT_FOUND).body("Esse alimento não existe.");
     }
 
 }
