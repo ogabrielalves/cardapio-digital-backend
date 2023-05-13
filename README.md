@@ -24,7 +24,7 @@ Este é um projeto de um cardápio digital, voltada para estudos de uma criaçã
 <br>
 
 > ### Método DELETE 🗑️
-#### Deletar um item do cardápio `.../food/deletar/{id}`
+#### Deletar um item do cardápio `.../food/delete/{id}`
 
 <br>
 
